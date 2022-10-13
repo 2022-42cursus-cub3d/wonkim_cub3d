@@ -9,6 +9,8 @@
 # include <errno.h>
 # include <stdbool.h>
 # include <math.h>
+# include "../LIBFT_GNL/libft.h"
+# include "../LIBFT_GNL/get_next_line/get_next_line.h"
 
 /*
 	status_define

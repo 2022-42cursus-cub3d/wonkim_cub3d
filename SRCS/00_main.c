@@ -6,12 +6,11 @@
 /*   By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:06:07 by wonkim            #+#    #+#             */
-/*   Updated: 2022/10/13 18:52:29 by wonkim           ###   ########.fr       */
+/*   Updated: 2022/10/13 19:01:45 by wonkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <unistd.h>
+#include "../INC/cub3d.h"
 
 int	main(int ac, char **av)
 {
