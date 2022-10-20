@@ -1,4 +1,4 @@
-#ifndef CUB3G_H
+#ifndef CUB3D_H
 # define CUB3D_H
 
 # include <unistd.h>
@@ -222,6 +222,4 @@ void	rotate(t_data *data, int direction)
 
 void	screen_size(void *mlx, int *width, int *height)
 void	error(t_data *data, char *err_msg, int status)
-
-
 #endif
