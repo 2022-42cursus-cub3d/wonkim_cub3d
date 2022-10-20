@@ -17,7 +17,6 @@
 # define C_SO   1
 # define C_WE   2
 # define C_EA   3
-# define C_S    4
 # define C_C    5
 # define C_F    6
 # define C_MAP  7
@@ -44,7 +43,7 @@ typedef struct s_config
 	int			pos_x;
 	int			pos_y;
 	char		dir;
-	int			set[9];
+	int			set[8];
 }	t_config;
 
 /*

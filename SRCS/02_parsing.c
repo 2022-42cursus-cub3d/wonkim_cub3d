@@ -60,11 +60,11 @@ int		parse_line(t_config *config, char *line, t_list **map_buffer)
 	if (len == 0)
 		return (1);
 	id = identifier(line);
-	if (id != C_MAP && id != C_S && (config->set[C_MAP] || config->set[id]))
+	if (id != C_MAP && (config->set[C_MAP] || config->set[id]))
 		return (0);
 	if (id == C_R)
 		return (parse_resolution(config, line));
-	else if ((id >= C_NO && id <= C_EA) || id == C_S)
+	else if (id >= C_NO && id <= C_EA)
 		return (parse_texture(config, id, line));
 	else if (id == C_F || id == C_C)
 		return (parse_color(config, id, line));
@@ -86,8 +86,6 @@ int		identifier(char *line)
 		return (C_WE);
 	else if (line[0] == 'E' && line[1] == 'A')
 		return (C_EA);
-	else if (line[0] == 'S' && line[1] == ' ')
-		return (C_S);
 	else if (line[0] == 'F' && line[1] == ' ')
 		return (C_F);
 	else if (line[0] == 'C' && line[1] == ' ')
