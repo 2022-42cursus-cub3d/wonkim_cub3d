@@ -9,12 +9,7 @@
 # include <errno.h>
 # include <stdbool.h>
 # include <math.h>
-<<<<<<< HEAD
-# include "../MLX/mlx.h"
-=======
->>>>>>> refs/remotes/origin/main
 # include "../LIBFT_GNL/get_next_line/get_next_line.h"
-# include "../LIBFT_GNL/libft.h"
 # include "../MLX/mlx.h"
 
 # define C_R    8
@@ -106,6 +101,12 @@ typedef struct s_rgb
 	int rgbs[3];
 	int rgb;
 }	t_rgb;
+
+typedef struct		s_list
+{
+	char			*content;
+	struct s_list	*next;
+}					t_list;
 
 typedef struct s_map
 {
@@ -216,16 +217,6 @@ typedef struct	s_pair
 	int			order;
 }				t_pair;
 
-
-<<<<<<< HEAD
-typedef struct		s_list
-{
-	char			*content;
-	struct s_list	*next;
-}					t_list;
-
-=======
->>>>>>> refs/remotes/origin/main
 /*
 ** main.c
 */
@@ -258,7 +249,6 @@ int		clear_config(t_config *config, int status);
 ** close.c
 */
 
-<<<<<<< HEAD
 int		start_game(t_data *data);
 int		game_close(t_data *data);
 void	draw(t_data *data);
@@ -273,11 +263,9 @@ void	coord_wall_tex(int x, t_back_line *line, t_data *data);
 void	calc_floor(t_back_line *line, t_vector *vec);
 void	coord_floor_color(int x, t_back_line *line, t_data *data);
 
-=======
 int				error(t_data *data, char *message, int status);
 void			buf_free(t_data *data, int i);
 void			clear_game(t_data *data, int status);
->>>>>>> refs/remotes/origin/main
 
 /*
 ** wall1.c
@@ -316,8 +304,6 @@ int		ft_atoi(const char *str);
 ** key_handling.c
 */
 
-<<<<<<< HEAD
-=======
 int				key_update(t_data *data);
 int				key_press(int key, t_data *data);
 int				key_release(int key, t_data *data);
@@ -346,7 +332,7 @@ int				save_image(t_data *data);
 int				write_bmp_header(int file, int filesize, t_data *data);
 
 int					ft_strcmp(char *s1, char *s2);
-// int					ft_strlen(char *s);
+int					ft_strlen(char *s);
 int					ft_endcmp(char *str, char *s);
 t_list				*lst_add_back(t_list **list, char *line);
 int					lst_clear(t_list **lst);
@@ -354,27 +340,12 @@ t_list				*ft_lstlast(t_list *lst);
 int					is_space(char ch);
 int					ft_atoi(const char *str);
 int					ft_isdigit(int c);
-// char				*ft_strrchr(char *s, int c);
+char				*ft_strrchr(char *s, int c);
 void				ft_swap(int *n1, int *n2);
 long long			ft_abs(int n);
 int					ft_intlen(int n);
 char				*ft_itoa(int n);
 void				screen_size(void *mlx, int *height, int *width);
->>>>>>> refs/remotes/origin/main
-
-int			ft_endcmp(char *str, char *s);
-long long	ft_abs(int n);
-int			ft_intlen(int n);
-char		*ft_itoa(int n);
-int			ft_strcmp(char *s1, char *s2);
-int			ft_strlen(char *s);
-char		*ft_strrchr(char *s, int c);
-t_list		*lst_add_back(t_list **lst, char *line);
-int			lst_clear(t_list **lst);
-t_list		*ft_lstlast(t_list *lst);
-int			is_space(char ch);
-int			ft_isdigit(int c);
-void		ft_swap(int *n1, int *n2);
-void		screen_size(void *mlx, int *width, int *height);
+char	*ft_strdup(const char *s1);
 
 #endif

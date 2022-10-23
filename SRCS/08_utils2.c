@@ -6,11 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 12:29:22 by wonkim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/23 14:00:56 by wonkim           ###   ########.fr       */
-=======
-/*   Updated: 2022/10/23 13:58:15 by hyojlee          ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2022/10/23 14:30:10 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,5 +214,22 @@ char	*ft_strrchr(const char *str, int c)
 	}
 	if ((unsigned char)*s == find && flag)
 		return (s);
+	return (ret);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*s;
+	char	*ret;
+	int		i;
+
+	s = (char *)s1;
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!ret)
+		return (0);
+	i = -1;
+	while (s[++i] != '\0')
+		ret[i] = s[i];
+	ret[i] = '\0';
 	return (ret);
 }
