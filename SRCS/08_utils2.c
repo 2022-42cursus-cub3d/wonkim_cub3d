@@ -3,82 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   08_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 12:29:22 by wonkim            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/23 14:00:56 by wonkim           ###   ########.fr       */
-=======
-/*   Updated: 2022/10/23 13:58:15 by hyojlee          ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Created: 2022/10/23 14:18:49 by wonkim            #+#    #+#             */
+/*   Updated: 2022/10/23 14:32:32 by wonkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INC/cub3d.h"
-
-// int	ft_endcmp(char *str, char *s)
-// {
-// 	int size;
-// 	int	i;
-
-// 	size = ft_strlen(str) - 1;
-// 	i = ft_strlen(s) - 1;
-// 	while (i >= 0 && size >= 0)
-// 	{
-// 		if (str[size--] != s[i--])
-// 			return (0);
-// 	}
-// 	return (1);
-// }
-
-// long long	ft_abs(int n)
-// {
-// 	long long n2;
-
-// 	n2 = n;
-// 	if (n < 0)
-// 		return (n2 * -1);
-// 	return (n2);
-// }
-
-// int			ft_intlen(int n)
-// {
-// 	int			len;
-// 	long long	n2;
-
-// 	len = 1;
-// 	n2 = ft_abs(n);
-// 	while (n2 /= 10)
-// 		len++;
-// 	return (len);
-// }
-
-// char		*ft_itoa(int n)
-// {
-// 	char		*str;
-// 	long long	n2;
-// 	int			i;
-// 	int			len;
-
-// 	n2 = ft_abs(n);
-// 	i = 1;
-// 	len = ft_intlen(n);
-// 	if (n < 0)
-// 		len++;
-// 	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
-// 		return (NULL);
-// 	if (n < 0)
-// 		str[0] = '-';
-// 	while (i <= len)
-// 	{
-// 		if (str[len - i] != '-')
-// 			str[len - i] = (n2 % 10) + '0';
-// 		n2 /= 10;
-// 		i++;
-// 	}
-// 	str[len] = '\0';
-// 	return (str);
-// }
 
 int		ft_strcmp(char *s1, char *s2)
 {
@@ -219,4 +151,64 @@ char	*ft_strrchr(const char *str, int c)
 	if ((unsigned char)*s == find && flag)
 		return (s);
 	return (ret);
+}
+
+void	buf_free(t_data *data, int i)
+{
+	while (i >= 0)
+	{
+		free(data->buf[i]);
+		i--;
+	}
+	free(data->buf);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*s;
+	char	*ret;
+	int		i;
+
+	s = (char *)s1;
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!ret)
+		return (0);
+	i = -1;
+	while (s[++i] != '\0')
+		ret[i] = s[i];
+	ret[i] = '\0';
+	return (ret);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char			*ret;
+	unsigned int	idx;
+
+	idx = 0;
+	if (!s)
+		return (0);
+	if (ft_strlen(s) < len)
+		len = ft_strlen(s);
+	ret = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ret)
+		return (0);
+	ret[0] = '\0';
+	if (ft_strlen(s) < start)
+		return (ret);
+	while (s[idx + start] != '\0' && idx < len)
+	{
+		ret[idx] = s[idx + start];
+		idx++;
+	}
+	ret[idx] = '\0';
+	return (ret);
+}
+
+void	clear_window(t_data *data)
+{
+	if (data->img.img_ptr)
+		mlx_destroy_image(data->mlx, data->img.img_ptr);
+	if (data->mlx && data->win)
+		mlx_destroy_window(data->mlx, data->win);
 }

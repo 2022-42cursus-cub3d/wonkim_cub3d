@@ -1,18 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/23 12:20:44 by wonkim            #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/10/23 13:39:18 by wonkim           ###   ########.fr        #
-=======
-#    Updated: 2022/10/23 13:25:38 by hyojlee          ###   ########.fr        #
->>>>>>> refs/remotes/origin/main
-#                                                                              #
-# **************************************************************************** #
 
 NAME		= cub3D
 
@@ -34,11 +19,8 @@ SRCS		= $(SRC_PATH)/00_main.c \
 				$(SRC_PATH)/08_utils2.c \
 				$(GNL_PATH)/get_next_line.c \
 			  	$(GNL_PATH)/get_next_line_utils.c
-<<<<<<< HEAD
 OBJS		= 	$(SRCS:.c=.o)
-=======
-OBJS		= $(SRCS:.c=.o)
->>>>>>> refs/remotes/origin/main
+
 
 CC			= cc
 CFLAGS		= -O3 -Wall -Wextra -Werror

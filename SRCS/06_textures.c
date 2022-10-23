@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
+/*   06_textures.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 12:18:16 by wonkim            #+#    #+#             */
-/*   Updated: 2022/10/23 12:19:34 by wonkim           ###   ########.fr       */
+/*   Updated: 2022/10/23 14:33:26 by wonkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void	load_image(t_data *data, int *texture, char *path, t_img *img)
 	img->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, path,
 			&img->width, &img->height);
 	if (!(img->img_ptr))
-		error_exit(data, "Error: texture loading failed\n", 1);
+		error(data, "Error: texture loading failed\n", 1);
 	img->data = (int *)mlx_get_data_addr(img->img_ptr, &img->bpp,
 			&img->size_l, &img->endian);
 	if (!(img->data))
-		error_exit(data, "Error: texture data loading failed\n", 1);
+		error(data, "Error: texture data loading failed\n", 1);
 	y = 0;
 	while (y < img->height)
 	{
