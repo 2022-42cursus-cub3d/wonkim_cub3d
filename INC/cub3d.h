@@ -96,6 +96,12 @@ typedef struct s_img
 	int			height;
 }	t_img;
 
+typedef struct s_rgb
+{
+	int rgbs[3];
+	int rgb;
+}	t_rgb;
+
 typedef struct s_map
 {
 	int		fd;
