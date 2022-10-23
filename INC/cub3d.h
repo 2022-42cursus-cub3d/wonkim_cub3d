@@ -242,7 +242,7 @@ void			clear_window(t_data *data);
 ** close.c
 */
 
-void			error(t_data *data, char *message, int status);
+int				error(t_data *data, char *message, int status);
 void			buf_free(t_data *data, int i);
 void			clear_game(t_data *data, int status);
 

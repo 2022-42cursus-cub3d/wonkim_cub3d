@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 12:29:22 by wonkim            #+#    #+#             */
-/*   Updated: 2022/10/23 13:40:45 by hyojlee          ###   ########.fr       */
+/*   Updated: 2022/10/23 13:58:15 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,87 +90,87 @@ int		ft_strcmp(char *s1, char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-// int		ft_strlen(char *s)
-// {
-// 	int	i;
+int		ft_strlen(char *s)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (s[i])
-// 		i++;
-// 	return (i);
-// }
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
 
-// char	*ft_strrchr(char *s, int c)
-// {
-// 	int	size;
+char	*ft_strrchr(char *s, int c)
+{
+	int	size;
 
-// 	size = ft_strlen(s) + 1;
-// 	while (size--)
-// 	{
-// 		if (s[size] == (char)c)
-// 			return ((char*)(s + size));
-// 	}
-// 	return (NULL);
-// }
+	size = ft_strlen(s) + 1;
+	while (size--)
+	{
+		if (s[size] == (char)c)
+			return ((char*)(s + size));
+	}
+	return (NULL);
+}
 
-// t_list	*lst_add_back(t_list **lst, char *line)
-// {
-// 	t_list	*tail;
-// 	t_list	*new;
+t_list	*lst_add_back(t_list **lst, char *line)
+{
+	t_list	*tail;
+	t_list	*new;
 
-// 	if (!line)
-// 		return (0);
-// 	if (!(new = (t_list*)malloc(sizeof(t_list))))
-// 		return (0);
-// 	new->content = line;
-// 	new->next = NULL;
-// 	if (!(*lst))
-// 		*lst = new;
-// 	else
-// 	{
-// 		tail = ft_lstlast(*lst);
-// 		tail->next = new;
-// 	}
-// 	return (new);
-// }
+	if (!line)
+		return (0);
+	if (!(new = (t_list*)malloc(sizeof(t_list))))
+		return (0);
+	new->content = line;
+	new->next = NULL;
+	if (!(*lst))
+		*lst = new;
+	else
+	{
+		tail = ft_lstlast(*lst);
+		tail->next = new;
+	}
+	return (new);
+}
 
-// int		lst_clear(t_list **lst)
-// {
-// 	t_list	*tmp;
+int		lst_clear(t_list **lst)
+{
+	t_list	*tmp;
 
-// 	while (*lst)
-// 	{
-// 		tmp = *lst;
-// 		free(tmp->content);
-// 		*lst = (*lst)->next;
-// 		free(tmp);
-// 	}
-// 	return (0);
-// }
+	while (*lst)
+	{
+		tmp = *lst;
+		free(tmp->content);
+		*lst = (*lst)->next;
+		free(tmp);
+	}
+	return (0);
+}
 
-// t_list	*ft_lstlast(t_list *lst)
-// {
-// 	if (!lst)
-// 		return (0);
-// 	while (lst->next)
-// 		lst = lst->next;
-// 	return (lst);
-// }
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (!lst)
+		return (0);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
 
-// int		is_space(char ch)
-// {
-// 	if (ch == '\n' || ch == '\v' || ch == '\f'
-// 			|| ch == '\r' || ch == '\t' || ch == ' ')
-// 		return (1);
-// 	return (0);
-// }
+int		is_space(char ch)
+{
+	if (ch == '\n' || ch == '\v' || ch == '\f'
+			|| ch == '\r' || ch == '\t' || ch == ' ')
+		return (1);
+	return (0);
+}
 
-// int		ft_isdigit(int c)
-// {
-// 	if (c >= '0' && c <= '9')
-// 		return (1);
-// 	return (0);
-// }
+int		ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
 void	ft_swap(int *n1, int *n2)
 {
