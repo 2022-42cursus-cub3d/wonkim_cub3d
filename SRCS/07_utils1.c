@@ -12,7 +12,7 @@ void	screen_size(void *mlx, int *width, int *height)
 		*height = sizey;
 }
 
-void	error(t_data *data, char *err_msg, int status)
+int	error(t_data *data, char *err_msg, int status)
 {
 	write(2, "Error:\n", 7);
 	write(2, err_msg, ft_strlen(err_msg));

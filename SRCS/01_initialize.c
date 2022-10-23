@@ -6,7 +6,7 @@
 /*   By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 12:18:36 by wonkim            #+#    #+#             */
-/*   Updated: 2022/10/23 12:18:38 by wonkim           ###   ########.fr       */
+/*   Updated: 2022/10/23 14:07:18 by wonkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,18 @@ int		buf_init(t_data *data)
 	return (0);
 }
 
-
+int		window_init(t_data *data)
+{
+	data->mlx_ptr = mlx_init();
+	if (!(data->mlx_ptr))
+		return (-1);
+	data->mlx_win = mlx_new_window(data->mlx_ptr,
+				data->config->win_width, data->config->win_height, "cub3D");
+	if (!(data->mlx_win))
+		return (-1);
+	data->img.img_ptr = mlx_new_image(data->mlx_ptr,
+						data->config->win_width, data->config->win_height);
+	data->img.data = (int *)mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
+			&data->img.size_l, &data->img.endian);
+	return (0);
+}

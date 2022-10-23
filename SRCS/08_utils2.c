@@ -6,7 +6,7 @@
 /*   By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 12:29:22 by wonkim            #+#    #+#             */
-/*   Updated: 2022/10/23 12:31:23 by wonkim           ###   ########.fr       */
+/*   Updated: 2022/10/23 14:00:56 by wonkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,4 +191,28 @@ void	screen_size(void *mlx, int *width, int *height)
 		*width = sizex;
 	if (sizey < *height)
 		*height = sizey;
+}
+
+char	*ft_strrchr(const char *str, int c)
+{
+	char			*s;
+	char			*ret;
+	unsigned char	find;
+	int				flag;
+
+	s = (char *)str;
+	ret = 0;
+	find = (unsigned char)c;
+	flag = 1;
+	while (*s)
+	{
+		if ((unsigned char)*s++ == find)
+		{
+			ret = s - 1;
+			flag = 0;
+		}
+	}
+	if ((unsigned char)*s == find && flag)
+		return (s);
+	return (ret);
 }

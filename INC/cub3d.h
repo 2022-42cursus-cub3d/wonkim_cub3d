@@ -9,7 +9,7 @@
 # include <errno.h>
 # include <stdbool.h>
 # include <math.h>
-# include "../LIBFT_GNL/libft.h"
+# include "../MLX/mlx.h"
 # include "../LIBFT_GNL/get_next_line/get_next_line.h"
 
 # define C_R    8
@@ -191,138 +191,111 @@ typedef struct	s_pair
 	int			order;
 }				t_pair;
 
+
 typedef struct		s_list
 {
 	char			*content;
 	struct s_list	*next;
 }					t_list;
 
-
-
-
 /*
 ** main.c
 */
 
-int				start_game(t_data *data);
-int				game_close(t_data *data);
-void			draw(t_data *data);
-
+int	main(int ac, char **av);
 /*
 ** data.c
 */
 
-void			ptr_init(t_data *data);
-void			dir_init(t_data *data);
-int				buf_init(t_data *data);
-void			key_init(t_data *data);
-int				data_init(t_data *data);
+void	ptr_init(t_data *data);
+int		data_init(t_data *data);
+void	dir_init(t_data *data);
+void	key_init(t_data *data);
+int		buf_init(t_data *data);
+int		window_init(t_data *data);
+
 
 /*
 ** window.c
 */
 
-int				window_init(t_data *data);
-void			clear_window(t_data *data);
+int		parse_config(t_config *config, char *path);
+void	config_init(t_config *config);
+int		parse_line(t_config *config, char *line, t_list **map_buffer);
+int		identifier(char *line);
+int		clear_config(t_config *config, int status);
+
 
 /*
 ** close.c
 */
 
-int				error_exit(t_data *data, char *message, int status);
-void			buf_free(t_data *data, int i);
-void			clear_game(t_data *data, int status);
+int		start_game(t_data *data);
+int		game_close(t_data *data);
+void	draw(t_data *data);
+void	clear_game(t_data *data, int status);
+void	calc_back(t_data *data);
+void	calc_vars(int x, t_vector *vec, t_data *data);
+void	calc_dists(t_vector *vec, t_data *data);
+void	ray_cast(t_vector *vec, t_data *data);
+void	calc_line(t_back_line *line, t_vector *vec, t_data *data);
+void	calc_wall(t_back_line *line, t_vector *vec, t_data *data);
+void	coord_wall_tex(int x, t_back_line *line, t_data *data);
+void	calc_floor(t_back_line *line, t_vector *vec);
+void	coord_floor_color(int x, t_back_line *line, t_data *data);
+
 
 /*
 ** wall1.c
 */
 
-void			calc_vars(int x, t_vector *vec, t_data *data);
-void			calc_dists(t_vector *vec, t_data *data);
-void			ray_cast(t_vector *vec, t_data *data);
-void			calc_back(t_data *data);
+int		key_update(t_data *data);
+int		key_press(int key, t_data *data);
+int		key_release(int key, t_data *data);
 
 /*
 ** wall2.c
 */
 
-void			calc_line(t_back_line *line, t_vector *vec, t_data *data);
-void			calc_wall(t_back_line *line, t_vector *vec, t_data *data);
-void			coord_wall_tex(int x, t_back_line *line, t_data *data);
+void	move_vertical(t_data *data, int direction);
+void	move_horizontal(t_data *data, int direction);
+void	rotate(t_data *data, int direction);
 
 /*
 ** floor.c
 */
 
-void			calc_floor(t_back_line *line, t_vector *vec);
-void			coord_floor_color(int x, t_back_line *line, t_data *data);
+int		tex_init(t_data *data);
+void	load_image(t_data *data, int *texture, char *path, t_img *img);
+void	load_texture(t_data *data);
+void	tex_free(t_data *data, int i);
 
 /*
 ** texture.c
 */
 
-int				tex_init(t_data *data);
-void			load_image(t_data *data, int *texture, char *path, t_img *img);
-void			load_texture(t_data *data);
-void			tex_free(t_data *data, int i);
-
-/*
-** sprite1.c
-*/
-
-int				malloc_sprite(t_data *data);
-void			sort_order(t_pair *sprites, int amount);
-void			sort_sprites(int *order, double *dist, int amount);
-void			calc_sprite(t_data *data);
-
-/*
-** sprite2.c
-*/
-
-void			calc_sprite_pos(t_sprt_line *sprt, int *order,
-								t_data *data, int i);
-void			calc_sprite_line(t_sprt_line *sprt, t_data *data);
-void			coord_sprite_tex(t_data *data, int *order,
-								t_sprt_line *sprite, int i);
+void	screen_size(void *mlx, int *width, int *height);
+int		error(t_data *data, char *err_msg, int status);
+int		ft_atoi(const char *str);
 
 /*
 ** key_handling.c
 */
 
-int				key_update(t_data *data);
-int				key_press(int key, t_data *data);
-int				key_release(int key, t_data *data);
 
-/*
-** camera.c
-*/
-
-void			move_vertical(t_data *data, int direction);
-void			move_horizontal(t_data *data, int direction);
-void			rotate(t_data *data, int direction);
-
-/*
-** save_bmp.c
-*/
-
-int				save_image(t_data *data);
-int				write_bmp_header(int file, int filesize, t_data *data);
-
-int					ft_strcmp(char *s1, char *s2);
-int					ft_strlen(char *s);
-int					ft_endcmp(char *str, char *s);
-t_list				*lst_add_back(t_list **list, char *line);
-int					lst_clear(t_list **lst);
-t_list				*ft_lstlast(t_list *lst);
-int					is_space(char ch);
-int					ft_atoi(const char *str);
-int					ft_isdigit(int c);
-char				*ft_strrchr(char *s, int c);
-void				ft_swap(int *n1, int *n2);
-long long			ft_abs(int n);
-int					ft_intlen(int n);
-char				*ft_itoa(int n);
-void				screen_size(void *mlx, int *height, int *width);
-
+int			ft_endcmp(char *str, char *s);
+long long	ft_abs(int n);
+int			ft_intlen(int n);
+char		*ft_itoa(int n);
+int			ft_strcmp(char *s1, char *s2);
+int			ft_strlen(char *s);
+char		*ft_strrchr(char *s, int c);
+t_list		*lst_add_back(t_list **lst, char *line);
+int			lst_clear(t_list **lst);
+t_list		*ft_lstlast(t_list *lst);
+int			is_space(char ch);
+int			ft_isdigit(int c);
+void		ft_swap(int *n1, int *n2);
+void		screen_size(void *mlx, int *width, int *height);
 
 #endif

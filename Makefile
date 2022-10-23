@@ -6,7 +6,7 @@
 #    By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/23 12:20:44 by wonkim            #+#    #+#              #
-#    Updated: 2022/10/23 12:34:36 by wonkim           ###   ########.fr        #
+#    Updated: 2022/10/23 13:39:18 by wonkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRCS		= 	$(SRC_PATH)/00_main.c \
 				$(SRC_PATH)/07_utils1.c \
 				$(SRC_PATH)/08_utils2.c \
 				$(GNL_PATH)/get_next_line.c \
-			  	$(GNL_PATH)/get_next_line_utils.c \
+			  	$(GNL_PATH)/get_next_line_utils.c
 OBJS		= 	$(SRCS:.c=.o)
 
 CC			= gcc
