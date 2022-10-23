@@ -9,8 +9,8 @@
 # include <errno.h>
 # include <stdbool.h>
 # include <math.h>
-# include "../MLX/mlx.h"
 # include "../LIBFT_GNL/get_next_line/get_next_line.h"
+# include "../UTILS/utils.h"
 # include "../MLX/mlx.h"
 
 # define C_R    7
@@ -66,13 +66,6 @@
 
 # define LEFT -1
 # define RIGHT 1
-
-typedef struct		s_list
-{
-	char			*content;
-	struct s_list	*next;
-}					t_list;
-
 
 typedef struct s_config
 {
@@ -303,36 +296,7 @@ int		tex_init(t_data *data);
 void	load_image(t_data *data, int *texture, char *path, t_img *img);
 void	load_texture(t_data *data);
 void	tex_free(t_data *data, int i);
-
-/*
-** texture.c
-*/
-
-void	screen_size(void *mlx, int *width, int *height);
-int		error(t_data *data, char *err_msg, int status);
-int		ft_atoi(const char *str);
-
-/*
-** key_handling.c
-*/
-
-int			ft_endcmp(char *str, char *s);
-long long	ft_abs(int n);
-int			ft_intlen(int n);
-char		*ft_itoa(int n);
-int			ft_strcmp(char *s1, char *s2);
-int			ft_strlen(char *s);
-char		*ft_strrchr(char *s, int c);
-t_list		*lst_add_back(t_list **lst, char *line);
-int			lst_clear(t_list **lst);
-t_list		*ft_lstlast(t_list *lst);
-int			is_space(char ch);
-int			ft_isdigit(int c);
-void		ft_swap(int *n1, int *n2);
-void		screen_size(void *mlx, int *width, int *height);
-void		buf_free(t_data *data, int i);
-char		*ft_strdup(const char *s1);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
+void	buf_free(t_data *data, int i);
 void	clear_window(t_data *data);
-
+int	error(t_data *data, char *err_msg, int status);
 #endif

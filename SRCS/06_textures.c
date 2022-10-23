@@ -6,7 +6,7 @@
 /*   By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 12:18:16 by wonkim            #+#    #+#             */
-/*   Updated: 2022/10/23 14:33:26 by wonkim           ###   ########.fr       */
+/*   Updated: 2022/10/24 00:38:18 by wonkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,31 @@ void	tex_free(t_data *data, int i)
 		i--;
 	}
 	free(data->texture);
+}
+
+void	buf_free(t_data *data, int i)
+{
+	while (i >= 0)
+	{
+		free(data->buf[i]);
+		i--;
+	}
+	free(data->buf);
+}
+
+void	clear_window(t_data *data)
+{
+	if (data->img.img_ptr)
+		mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
+	if (data->mlx_ptr && data->mlx_win)
+		mlx_destroy_window(data->mlx_ptr, data->mlx_win);
+}
+
+int	error(t_data *data, char *err_msg, int status)
+{
+	write(2, "Error:\n", 7);
+	write(2, err_msg, ft_strlen(err_msg));
+	clear_game(data, status);
+	exit(-1);
+	return (-1);
 }

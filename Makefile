@@ -6,6 +6,7 @@ SRC_PATH	= ./SRCS
 MLX_PATH	= ./MLX
 MMS_PATH	= ./MLX_BETA
 GNL_PATH	= ./LIBFT_GNL/get_next_line
+UTL_PATH	= ./UTILS
 
 INCS		= -I$(INC_PATH)
 SRCS		= $(SRC_PATH)/00_main.c \
@@ -15,10 +16,10 @@ SRCS		= $(SRC_PATH)/00_main.c \
 			 	$(SRC_PATH)/04_keypress.c \
 			 	$(SRC_PATH)/05_move.c \
 			  	$(SRC_PATH)/06_textures.c \
-				$(SRC_PATH)/07_utils1.c \
-				$(SRC_PATH)/08_utils2.c \
 				$(GNL_PATH)/get_next_line.c \
-			  	$(GNL_PATH)/get_next_line_utils.c
+			  	$(GNL_PATH)/get_next_line_utils.c \
+			  	$(UTL_PATH)/ft_atoi.c $(UTL_PATH)/ft_endcmp.c $(UTL_PATH)/ft_strcmp.c $(UTL_PATH)/ft_strlen.c \
+			  	$(UTL_PATH)/ft_itoa.c $(UTL_PATH)/ft_strrchr.c $(UTL_PATH)/lst_add_back.c $(UTL_PATH)/utils.c
 OBJS		= 	$(SRCS:.c=.o)
 
 
