@@ -30,21 +30,12 @@
 # define T_C 5
 # define T_F 6
 
-typedef struct s_config
-{
-	int			win_width;
-	int			win_height;
-	char		*tex_path[TEXTURES];
-	int			cf_color[2];
-	char		**map;
-	char		**map_c;
-	int			map_row;
-	int			map_col;
-	int			pos_x;
-	int			pos_y;
-	char		dir;
-	int			set[8];
-}	t_config;
+# define Y_PLANE 1
+# define X_PLANE 0
+
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
+
 
 /*
 	status_define
@@ -74,6 +65,25 @@ typedef struct s_config
 
 # define LEFT -1
 # define RIGHT 1
+
+
+
+
+typedef struct s_config
+{
+	int			win_width;
+	int			win_height;
+	char		*tex_path[TEXTURES];
+	int			cf_color[2];
+	char		**map;
+	char		**map_c;
+	int			map_row;
+	int			map_col;
+	int			pos_x;
+	int			pos_y;
+	char		dir;
+	int			set[8];
+}	t_config;
 
 typedef struct s_img
 {
@@ -125,6 +135,10 @@ typedef struct s_data
 	double		dir_y;
 	double		pln_x;
 	double		pln_y;
+	int			score;
+	int			**buf;
+	double		*z_buf;
+	int			**texture;
 	double		move_speed;
 	double		rotation_speed;
 
@@ -181,44 +195,128 @@ typedef struct		s_list
 
 
 /*
-	03_draw.c
+** main.c
 */
 
-int		start_game(t_data *data)
-int		game_close(t_data *data)
-void	draw(t_data *data)
-void	clear_game(t_data *data, int status)
-void	calc_back(t_data *data)
-void	calc_vars(int x, t_vector *vec, t_data *data)
-void	calc_dists(t_vector *vec, t_data *data)
-void	ray_cast(t_vector *vec, t_data *data)
-void	calc_line(t_back_line *line, t_vector *vec, t_data *data)
-void	calc_wall(t_back_line *line, t_vector *vec, t_data *data)
-void	coord_wall_tex(int x, t_back_line *line, t_data *data)
-void	calc_floor(t_back_line *line, t_vector *vec)
-void	coord_floor_color(int x, t_back_line *line, t_data *data)
+int				start_game(t_data *data);
+int				game_close(t_data *data);
+void			draw(t_data *data);
 
 /*
-	04_key.c
+** data.c
 */
 
-int		key_update(t_data *data)
-int		key_press(int key, t_data *data)
-int		key_release(int key, t_data *data)
+void			ptr_init(t_data *data);
+void			dir_init(t_data *data);
+int				buf_init(t_data *data);
+void			key_init(t_data *data);
+int				data_init(t_data *data);
 
 /*
-	05_move.c
+** window.c
 */
 
-void	move_vertical(t_data *data, int direction)
-void	move_horizontal(t_data *data, int direction)
-void	rotate(t_data *data, int direction)
-
+int				window_init(t_data *data);
+void			clear_window(t_data *data);
 
 /*
-	09_utils.c
+** close.c
 */
 
-void	screen_size(void *mlx, int *width, int *height)
-void	error(t_data *data, char *err_msg, int status)
+int				error_exit(t_data *data, char *message, int status);
+void			buf_free(t_data *data, int i);
+void			clear_game(t_data *data, int status);
+
+/*
+** wall1.c
+*/
+
+void			calc_vars(int x, t_vector *vec, t_data *data);
+void			calc_dists(t_vector *vec, t_data *data);
+void			ray_cast(t_vector *vec, t_data *data);
+void			calc_back(t_data *data);
+
+/*
+** wall2.c
+*/
+
+void			calc_line(t_back_line *line, t_vector *vec, t_data *data);
+void			calc_wall(t_back_line *line, t_vector *vec, t_data *data);
+void			coord_wall_tex(int x, t_back_line *line, t_data *data);
+
+/*
+** floor.c
+*/
+
+void			calc_floor(t_back_line *line, t_vector *vec);
+void			coord_floor_color(int x, t_back_line *line, t_data *data);
+
+/*
+** texture.c
+*/
+
+int				tex_init(t_data *data);
+void			load_image(t_data *data, int *texture, char *path, t_img *img);
+void			load_texture(t_data *data);
+void			tex_free(t_data *data, int i);
+
+/*
+** sprite1.c
+*/
+
+int				malloc_sprite(t_data *data);
+void			sort_order(t_pair *sprites, int amount);
+void			sort_sprites(int *order, double *dist, int amount);
+void			calc_sprite(t_data *data);
+
+/*
+** sprite2.c
+*/
+
+void			calc_sprite_pos(t_sprt_line *sprt, int *order,
+								t_data *data, int i);
+void			calc_sprite_line(t_sprt_line *sprt, t_data *data);
+void			coord_sprite_tex(t_data *data, int *order,
+								t_sprt_line *sprite, int i);
+
+/*
+** key_handling.c
+*/
+
+int				key_update(t_data *data);
+int				key_press(int key, t_data *data);
+int				key_release(int key, t_data *data);
+
+/*
+** camera.c
+*/
+
+void			move_vertical(t_data *data, int direction);
+void			move_horizontal(t_data *data, int direction);
+void			rotate(t_data *data, int direction);
+
+/*
+** save_bmp.c
+*/
+
+int				save_image(t_data *data);
+int				write_bmp_header(int file, int filesize, t_data *data);
+
+int					ft_strcmp(char *s1, char *s2);
+int					ft_strlen(char *s);
+int					ft_endcmp(char *str, char *s);
+t_list				*lst_add_back(t_list **list, char *line);
+int					lst_clear(t_list **lst);
+t_list				*ft_lstlast(t_list *lst);
+int					is_space(char ch);
+int					ft_atoi(const char *str);
+int					ft_isdigit(int c);
+char				*ft_strrchr(char *s, int c);
+void				ft_swap(int *n1, int *n2);
+long long			ft_abs(int n);
+int					ft_intlen(int n);
+char				*ft_itoa(int n);
+void				screen_size(void *mlx, int *height, int *width);
+
+
 #endif

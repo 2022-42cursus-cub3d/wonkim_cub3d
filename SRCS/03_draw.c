@@ -6,7 +6,7 @@
 /*   By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 17:57:00 by wonkim            #+#    #+#             */
-/*   Updated: 2022/10/20 15:49:54 by wonkim           ###   ########.fr       */
+/*   Updated: 2022/10/23 12:18:51 by wonkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ void	draw(t_data *data)
 	int	y;
 
 	y = 0;
-	while (y < data->config.win_height)
+	while (y < data->config->win_height)
 	{
 		x = 0;
-		while (x < data->config.win_width)
+		while (x < data->config->win_width)
 		{
-			data->img.data[y * data->config.win_width + x] = data->buf[y][x];
+			data->img.data[y * data->config->win_width + x] = data->buf[y][x];
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 0, 0);
 }
 
 void	clear_game(t_data *data, int status)
@@ -53,7 +53,7 @@ void	clear_game(t_data *data, int status)
 		if (status != 0)
 			clear_config(data->config, status);
 		if (data->buf)
-			buf_free(data, data->config.win_height - 1);
+			buf_free(data, data->config->win_height - 1);
 		if (data->texture)
 			tex_free(data, TEXTURES - 1);
 		if (data->z_buf)
@@ -69,7 +69,7 @@ void	calc_back(t_data *data)
 	int			x;
 
 	x = 0;
-	while (x < data->config.win_width)
+	while (x < data->config->win_width)
 	{
 		calc_vars(x, &vec, data);
 		calc_dists(&vec, data);
@@ -88,7 +88,7 @@ void	calc_vars(int x, t_vector *vec, t_data *data)
 {
 	double	camera_x;
 
-	camera_x = 2 * x / (double)data->config.win_width - 1;
+	camera_x = 2 * x / (double)data->config->win_width - 1;
 	vec->r_dir_x = data->dir_x + data->pln_x * camera_x;
 	vec->r_dir_y = data->dir_y + data->pln_y * camera_x;
 	vec->map_x = (int)data->pos_x;
@@ -140,7 +140,7 @@ void	ray_cast(t_vector *vec, t_data *data)
 			vec->map_y += vec->step_y;
 			vec->side = Y_PLANE;
 		}
-		if (data->config.map[vec->map_x][vec->map_y] == '1')
+		if (data->config->map[vec->map_x][vec->map_y] == '1')
 			hit = 1;
 	}
 }
@@ -157,13 +157,13 @@ void	calc_line(t_back_line *line, t_vector *vec, t_data *data)
 		vec->prp_wal_dst = (vec->map_y - data->pos_y + (1 - vec->step_y) / 2);
 		vec->prp_wal_dst /= vec->r_dir_y;
 	}
-	line->l_height = (int)(data->config.win_height / vec->prp_wal_dst);
-	line->draw_strt = -(line->l_height) / 2 + data->config.win_height / 2;
+	line->l_height = (int)(data->config->win_height / vec->prp_wal_dst);
+	line->draw_strt = -(line->l_height) / 2 + data->config->win_height / 2;
 	if (line->draw_strt < 0)
 		line->draw_strt = 0;
-	line->draw_end = line->l_height / 2 + data->config.win_height / 2;
-	if (line->draw_end >= data->config.win_height)
-		line->draw_end = data->config.win_height - 1;
+	line->draw_end = line->l_height / 2 + data->config->win_height / 2;
+	if (line->draw_end >= data->config->win_height)
+		line->draw_end = data->config->win_height - 1;
 }
 
 void	calc_wall(t_back_line *line, t_vector *vec, t_data *data)
@@ -196,7 +196,7 @@ void	coord_wall_tex(int x, t_back_line *line, t_data *data)
 	int		y;
 
 	step = 1.0 * TEX_HEIGHT / line->l_height;
-	tex_pos = (line->draw_strt - data->config.win_height
+	tex_pos = (line->draw_strt - data->config->win_height
 				/ 2 + line->l_height / 2) * step;
 	y = line->draw_strt;
 	while (y < line->draw_end)
@@ -239,12 +239,12 @@ void	coord_floor_color(int x, t_back_line *line, t_data *data)
 	int		y;
 
 	if (line->draw_end < 0)
-		line->draw_end = data->config.win_height;
+		line->draw_end = data->config->win_height;
 	y = line->draw_end + 1;
-	while (y < data->config.win_height)
+	while (y < data->config->win_height)
 	{
-		data->buf[y][x] = data->config.cf_color[1];
-		data->buf[data->config.win_height - y - 1][x] = data->config.cf_color[0];
+		data->buf[y][x] = data->config->cf_color[1];
+		data->buf[data->config->win_height - y - 1][x] = data->config->cf_color[0];
 		y++;
 	}
 }
