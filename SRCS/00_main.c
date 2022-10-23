@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   00_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 12:18:29 by wonkim            #+#    #+#             */
-/*   Updated: 2022/10/23 12:18:31 by wonkim           ###   ########.fr       */
+/*   Updated: 2022/10/23 13:46:08 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INC/cub3d.h"
 
-int	main(int ac, char **av)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 
 	ptr_init(&data);
-	if (ac != 2 || ft_strcmp(ft_strrchr(av[1], '.'), ".cub"))
+	if (argc != 2 || ft_strcmp(ft_strrchr(argv[1], '.'), ".cub"))
 		return (error(&data, "check argument\n", -1));
-	if (!parse_config(&data.config, av[1]))
+	if (!parse_config((&data)->config, argv[1]))
 		return (error(&data, "parsing error", -1));
-	if (!data_init(&data) == -1 || window_init(&data) == -1)
+	if (data_init(&data) == -1 || window_init(&data) == -1)
 		return (error(&data, "malloc error", 1));
 	load_texture(&data);
 	screen_size(data.mlx_ptr, &data.config->win_width, &data.config->win_height);

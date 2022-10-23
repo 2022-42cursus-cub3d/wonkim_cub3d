@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+         #
+#    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/23 12:20:44 by wonkim            #+#    #+#              #
-#    Updated: 2022/10/23 12:34:36 by wonkim           ###   ########.fr        #
+#    Updated: 2022/10/23 13:25:38 by hyojlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ MMS_PATH	= ./MLX_BETA
 GNL_PATH	= ./LIBFT_GNL/get_next_line
 
 INCS		= -I$(INC_PATH)
-SRCS		= 	$(SRC_PATH)/00_main.c \
+SRCS		= $(SRC_PATH)/00_main.c \
 				$(SRC_PATH)/01_initialize.c \
 				$(SRC_PATH)/02_parsing.c \
 				$(SRC_PATH)/03_draw.c \
@@ -29,10 +29,10 @@ SRCS		= 	$(SRC_PATH)/00_main.c \
 				$(SRC_PATH)/07_utils1.c \
 				$(SRC_PATH)/08_utils2.c \
 				$(GNL_PATH)/get_next_line.c \
-			  	$(GNL_PATH)/get_next_line_utils.c \
-OBJS		= 	$(SRCS:.c=.o)
+			  	$(GNL_PATH)/get_next_line_utils.c
+OBJS		= $(SRCS:.c=.o)
 
-CC			= gcc
+CC			= cc
 CFLAGS		= -O3 -Wall -Wextra -Werror
 MLXFLAGS	= -Lmlx -lm -Lmlx_beta -lmlx -framework OpenGL -framework AppKit
 MMS			= libmlx.dylib
@@ -41,7 +41,7 @@ MLX			= libm.a
 .c.o:
 		$(CC) $(CFLAGS) $(INCS) -c $< -o $(<:.c=.o)
 
-$(NAME):	$(MLX) $(OBJS) $(MMS)
+$(NAME): $(MLX) $(OBJS) $(MMS)
 		$(CC) $(CFLAGS) $(INCS) -o $(NAME) -L $(MLX_PATH) $(MLXFLAGS) $(OBJS)
 		@echo $(NAME) : Created
 
@@ -53,18 +53,12 @@ $(MMS):
 		@$(MAKE) -C mlx_beta
 		cp $(MMS_PATH)/$(MMS) .
 
-$(BONUS):	$(MLX) $(BNS_OBJS) $(MMS)
-		$(CC) $(CFLAGS) $(INCS) -o $(NAME) -L $(MLX_PATH) $(MLXFLAGS) $(BNS_OBJS)
-		@echo $(BONUS) : Created
-
 all:	$(NAME)
-
-bonus:	$(BONUS)
 
 clean:
 		@$(MAKE) -C mlx clean
 		@$(MAKE) -C mlx_beta clean
-		rm -f $(OBJS) $(BNS_OBJS)
+		rm -f $(OBJS)
 
 fclean: clean
 		rm -f $(NAME) $(BONUS) $(MMS) $(MLX_PATH)/$(MLX)
