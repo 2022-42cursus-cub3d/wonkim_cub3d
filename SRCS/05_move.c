@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   05_move.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 14:06:44 by wonkim            #+#    #+#             */
-/*   Updated: 2022/10/23 12:18:02 by wonkim           ###   ########.fr       */
+/*   Updated: 2022/10/24 13:13:45 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	move_vertical(t_data *data, int direction)
 	tmp_y = data->pos_y + direction * data->dir_y * data->move_speed;
 	if (direction == 1)
 	{
-		if (data->config->map[tmp_x][tmp_y] != '1')
+		if (data->config.map[tmp_x][tmp_y] != '1')
 		{
 			data->pos_x += data->dir_x * data->move_speed;
 			data->pos_y += data->dir_y * data->move_speed;
@@ -29,7 +29,7 @@ void	move_vertical(t_data *data, int direction)
 	}
 	if (direction == -1)
 	{
-		if (data->config->map[tmp_x][tmp_y] != '1')
+		if (data->config.map[tmp_x][tmp_y] != '1')
 		{
 			data->pos_x -= data->dir_x * data->move_speed;
 			data->pos_y -= data->dir_y * data->move_speed;
@@ -46,7 +46,7 @@ void	move_horizontal(t_data *data, int direction)
 	tmp_y = data->pos_y + direction * data->pln_y * data->move_speed;
 	if (direction == 1)
 	{
-		if (data->config->map[tmp_x][tmp_y] != '1')
+		if (data->config.map[tmp_x][tmp_y] != '1')
 		{
 			data->pos_x += data->pln_x * data->move_speed;
 			data->pos_y += data->pln_y * data->move_speed;
@@ -54,7 +54,7 @@ void	move_horizontal(t_data *data, int direction)
 	}
 	if (direction == -1)
 	{
-		if (data->config->map[tmp_x][tmp_y] != '1')
+		if (data->config.map[tmp_x][tmp_y] != '1')
 		{
 			data->pos_x -= data->pln_x * data->move_speed;
 			data->pos_y -= data->pln_y * data->move_speed;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_initialize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 12:18:36 by wonkim            #+#    #+#             */
-/*   Updated: 2022/10/23 14:07:18 by wonkim           ###   ########.fr       */
+/*   Updated: 2022/10/24 13:12:37 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ptr_init(t_data *data)
 
 int		data_init(t_data *data)
 {
-	data->pos_x = data->config->pos_x + 0.5;
-	data->pos_y = data->config->pos_y + 0.5;
+	data->pos_x = data->config.pos_x + 0.5;
+	data->pos_y = data->config.pos_y + 0.5;
 	data->dir_x = 0;
 	data->dir_y = 0;
 	data->pln_x = 0;
@@ -38,23 +38,23 @@ int		data_init(t_data *data)
 	key_init(data);
 	if (buf_init(data) == -1 || tex_init(data) == -1)
 		return (-1);
-	data->z_buf = (double*)malloc(sizeof(double) * data->config->win_width);
+	data->z_buf = (double*)malloc(sizeof(double) * data->config.win_width);
 	return (0);
 }
 
 void	dir_init(t_data *data)
 {
-	if (data->config->dir == 'N')
+	if (data->config.dir == 'N')
 	{
 		data->dir_y = -1;
 		data->pln_x = 0.66;
 	}
-	else if (data->config->dir == 'S')
+	else if (data->config.dir == 'S')
 	{
 		data->dir_y = 1;
 		data->pln_x = -0.66;
 	}
-	else if (data->config->dir == 'W')
+	else if (data->config.dir == 'W')
 	{
 		data->dir_x = -1;
 		data->pln_y = -0.66;
@@ -81,20 +81,20 @@ int		buf_init(t_data *data)
 	int i;
 	int j;
 
-	data->buf = (int**)malloc(sizeof(int*) * data->config->win_height);
+	data->buf = (int**)malloc(sizeof(int*) * data->config.win_height);
 	if (!(data->buf))
 		return (-1);
 	i = 0;
-	while (i < data->config->win_height)
+	while (i < data->config.win_height)
 	{
-		data->buf[i] = (int*)malloc((sizeof(int) * data->config->win_width));
+		data->buf[i] = (int*)malloc((sizeof(int) * data->config.win_width));
 		if (!(data->buf[i]))
 		{
 			buf_free(data, i);
 			return (-1);
 		}
 		j = 0;
-		while (j < data->config->win_width)
+		while (j < data->config.win_width)
 		{
 			data->buf[i][j] = 0;
 			j++;
@@ -110,11 +110,11 @@ int		window_init(t_data *data)
 	if (!(data->mlx_ptr))
 		return (-1);
 	data->mlx_win = mlx_new_window(data->mlx_ptr,
-				data->config->win_width, data->config->win_height, "cub3D");
+				data->config.win_width, data->config.win_height, "cub3D");
 	if (!(data->mlx_win))
 		return (-1);
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr,
-						data->config->win_width, data->config->win_height);
+						data->config.win_width, data->config.win_height);
 	data->img.data = (int *)mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
 			&data->img.size_l, &data->img.endian);
 	return (0);

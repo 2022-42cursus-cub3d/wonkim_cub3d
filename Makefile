@@ -24,7 +24,8 @@ OBJS		= 	$(SRCS:.c=.o)
 
 
 CC			= cc
-CFLAGS		= -O3 -Wall -Wextra -Werror
+CFLAGS		= -g3 -fsanitize=address
+# CFLAGS		= -O3 -Wall -Wextra -Werror
 MLXFLAGS	= -Lmlx -lm -Lmlx_beta -lmlx -framework OpenGL -framework AppKit
 MMS			= libmlx.dylib
 MLX			= libm.a

@@ -148,7 +148,7 @@ typedef struct s_data
 
 	t_img		img;
 	t_key		key;
-	t_config	*config;
+	t_config	config;
 }				t_data;
 
 typedef struct	s_vetor

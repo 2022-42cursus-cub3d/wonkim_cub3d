@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   06_textures.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonkim <wonkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 12:18:16 by wonkim            #+#    #+#             */
-/*   Updated: 2022/10/24 00:38:18 by wonkim           ###   ########.fr       */
+/*   Updated: 2022/10/24 13:14:06 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ void	load_texture(t_data *data)
 {
 	t_img	img;
 
-	load_image(data, data->texture[T_NO], data->config->tex_path[T_NO], &img);
-	load_image(data, data->texture[T_SO], data->config->tex_path[T_SO], &img);
-	load_image(data, data->texture[T_WE], data->config->tex_path[T_WE], &img);
-	load_image(data, data->texture[T_EA], data->config->tex_path[T_EA], &img);
+	load_image(data, data->texture[T_NO], data->config.tex_path[T_NO], &img);
+	load_image(data, data->texture[T_SO], data->config.tex_path[T_SO], &img);
+	load_image(data, data->texture[T_WE], data->config.tex_path[T_WE], &img);
+	load_image(data, data->texture[T_EA], data->config.tex_path[T_EA], &img);
 }
 
 void	tex_free(t_data *data, int i)
